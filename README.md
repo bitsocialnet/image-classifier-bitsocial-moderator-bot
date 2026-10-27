@@ -1,4 +1,4 @@
-# image-classifier-bot
+# image-classifier-bitsocial-moderator-bot
 
 A moderator bot for PKC (Bitsocial) communities that only want one kind of picture: only cats, only dogs, only food. New posts go to the community's mod queue, and the bot approves or rejects each one by classifying its linked image with a CLIP/SigLIP model on a server you host yourself. Posters never wait for the check, and no image goes to a third-party AI service.
 
@@ -29,6 +29,8 @@ You need to own the community (it runs on your bitsocial daemon) and be able to 
 ### 1. Start the model server
 
 ```bash
+git clone https://github.com/bitsocialnet/image-classifier-bitsocial-moderator-bot.git
+cd image-classifier-bitsocial-moderator-bot
 docker compose -f deploy/docker-compose.yml up -d
 docker logs -f image-classifier-ml   # wait for "Loading visual model"; the first start downloads ~800 MB
 ```
@@ -63,7 +65,7 @@ bitsocial community edit <community address> '--roles["<bot address>"].role' mod
 
 ### 4. Send new posts to the mod queue
 
-Add a challenge that always succeeds and marks posts for approval, exempting moderators (including the bot) and everything that isn't a post. Also set how long rejected posts are kept (here one day). Add any challenges you already use to the same list, since this replaces it:
+Add a challenge that always succeeds and marks posts for approval, exempting moderators (including the bot) and everything that isn't a post, and set how long rejected posts are kept (here one day). [`examples/mod-queue-settings.json`](examples/mod-queue-settings.json) has exactly that:
 
 ```json
 {
@@ -92,8 +94,10 @@ Add a challenge that always succeeds and marks posts for approval, exempting mod
 }
 ```
 
+`settings.challenges` replaces the community's whole challenge list, so add any challenges you already use to your copy (the cats example below puts the spam blocker first). Then apply it:
+
 ```bash
-bitsocial community edit <community address> --jsonFile ./queue-settings.json
+bitsocial community edit <community address> --jsonFile ./mod-queue-settings.json
 ```
 
 Exempt moderators from every other challenge too (`"exclude": [{ "roles": ["moderator", "admin", "owner"] }]`), or the bot's approvals get challenged and fail. It's also worth telling posters in `rules` what is allowed, that a bot checks posts, and how long rejected ones are kept.
@@ -275,3 +279,7 @@ npm ci
 npm test
 npm run type-check
 ```
+
+## License
+
+GPL-3.0-or-later. This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. See [LICENSE](LICENSE).

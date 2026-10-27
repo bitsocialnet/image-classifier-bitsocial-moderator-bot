@@ -1,8 +1,29 @@
 {
-    "name": "image-classifier-bot",
+    "name": "image-classifier-bitsocial-moderator-bot",
     "version": "0.1.0",
     "private": true,
     "description": "Moderator bot that approves or rejects posts in a PKC community's mod queue by classifying their linked image with a self-hosted CLIP/SigLIP model",
+    "keywords": [
+        "bitsocial",
+        "pkc",
+        "moderation",
+        "moderator-bot",
+        "image-classification",
+        "clip",
+        "siglip",
+        "zero-shot",
+        "immich",
+        "self-hosted",
+        "p2p"
+    ],
+    "homepage": "https://github.com/bitsocialnet/image-classifier-bitsocial-moderator-bot#readme",
+    "bugs": {
+        "url": "https://github.com/bitsocialnet/image-classifier-bitsocial-moderator-bot/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bitsocialnet/image-classifier-bitsocial-moderator-bot.git"
+    },
     "license": "GPL-3.0-or-later",
     "type": "module",
     "engines": {

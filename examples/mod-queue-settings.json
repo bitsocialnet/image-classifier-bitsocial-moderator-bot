@@ -1,0 +1,24 @@
+{
+    "settings": {
+        "purgeDisapprovedCommentsOlderThan": 86400,
+        "challenges": [
+            {
+                "name": "publication-match",
+                "description": "New posts wait for an image check before they appear.",
+                "pendingApproval": true,
+                "exclude": [
+                    { "roles": ["moderator", "admin", "owner"] },
+                    {
+                        "publicationType": {
+                            "reply": true,
+                            "vote": true,
+                            "commentEdit": true,
+                            "commentModeration": true,
+                            "communityEdit": true
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
