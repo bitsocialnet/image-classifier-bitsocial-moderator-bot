@@ -130,12 +130,12 @@ This is the setup behind `onlycats.bso`. Big cats count as cats, captioned cat p
 ```json
 {
     "title": "Only Cats",
-    "description": "Pictures of cats. That's it.",
+    "description": "Pictures of cats. That's it. Every new post is checked by a self-hosted AI vision model that looks at the linked image and only lets cats through.",
     "rules": [
         "Every post must link directly to an image (jpg, png, webp or gif) of a cat hosted on forgeimg.net or i.imgur.com. Big cats count.",
         "Real cats only: no drawings, cartoons, AI art, sculptures or plush toys. Captioned cat photos are fine.",
         "Replies can be anything.",
-        "New posts are checked by a bot within a minute; rejected posts are deleted after a day."
+        "New posts wait in the mod queue until an AI vision model (running on this community's own server; images are not sent to any outside service) checks that the image shows a cat. That usually takes a few seconds. Rejected posts show the reason and are deleted after a day."
     ],
     "settings": {
         "fetchThumbnailUrls": true,
