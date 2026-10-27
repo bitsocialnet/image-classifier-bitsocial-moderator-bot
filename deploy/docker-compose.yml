@@ -1,0 +1,29 @@
+# Model server for @bitsocial/image-classifier-challenge: the Immich machine-learning container, CPU build.
+# Listens on localhost only; the challenge reaches it at http://127.0.0.1:3003 (the mlUrl default).
+#
+#   docker compose -f deploy/docker-compose.yml up -d
+#
+# The first start downloads the model (~800 MB) into the image-classifier-model-cache volume.
+services:
+    image-classifier-ml:
+        image: ghcr.io/immich-app/immich-machine-learning:v3.3.5
+        container_name: image-classifier-ml
+        restart: unless-stopped
+        ports:
+            - "127.0.0.1:3003:3003"
+        environment:
+            # Keep the model in memory; otherwise the first post after 5 idle minutes waits for it to reload.
+            MACHINE_LEARNING_MODEL_TTL: "0"
+            # Load the model at startup instead of on the first post. Must match the challenge's `model` option.
+            MACHINE_LEARNING_PRELOAD__CLIP__TEXTUAL: ViT-B-16-SigLIP2__webli
+            MACHINE_LEARNING_PRELOAD__CLIP__VISUAL: ViT-B-16-SigLIP2__webli
+        volumes:
+            - image-classifier-model-cache:/cache
+        healthcheck:
+            test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:3003/ping')"]
+            interval: 30s
+            timeout: 5s
+            retries: 3
+
+volumes:
+    image-classifier-model-cache:

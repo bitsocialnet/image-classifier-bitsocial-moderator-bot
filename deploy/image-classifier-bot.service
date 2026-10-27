@@ -1,0 +1,17 @@
+[Unit]
+Description=Image classifier mod-queue bot (approves or rejects posts by their linked image)
+After=network-online.target bitsocial.service docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/image-classifier-bot
+Environment=NODE_ENV=production
+Environment=PATH=/root/.nvm/versions/node/v22.23.4/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/root/.nvm/versions/node/v22.23.4/bin/npm start
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

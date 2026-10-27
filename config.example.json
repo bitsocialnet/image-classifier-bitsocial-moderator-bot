@@ -1,0 +1,25 @@
+{
+    "rpcUrl": "ws://localhost:9138",
+    "communityAddress": "onlycats.bso",
+    "dataDir": "data",
+    "classifier": {
+        "mlUrl": "http://127.0.0.1:3003",
+        "model": "ViT-B-16-SigLIP2__webli",
+        "allowed": ["a photo of a cat", "a photo of a kitten", "a photo of a lion, tiger or other big cat"],
+        "disallowed": [
+            "a photo of a dog",
+            "a photo of a fox",
+            "a photo of another animal",
+            "a drawing or painting of a cat",
+            "a cartoon or illustration",
+            "a statue or sculpture of a cat",
+            "a stuffed toy cat",
+            "a screenshot",
+            "a photo of a person",
+            "a photo of food",
+            "a photo of an object or place"
+        ],
+        "threshold": 0.35,
+        "allowedHosts": ["forgeimg.net", "i.imgur.com"]
+    }
+}

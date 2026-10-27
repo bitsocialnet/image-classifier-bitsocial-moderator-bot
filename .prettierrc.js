@@ -1,0 +1,5 @@
+export default {
+    tabWidth: 4,
+    printWidth: 140,
+    trailingComma: "none"
+};

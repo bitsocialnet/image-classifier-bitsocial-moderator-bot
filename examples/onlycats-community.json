@@ -1,0 +1,37 @@
+{
+    "title": "Only Cats",
+    "description": "Pictures of cats. That's it.",
+    "rules": [
+        "Every post must link directly to an image (jpg, png, webp or gif) of a cat hosted on forgeimg.net or i.imgur.com. Big cats count.",
+        "Real cats only: no drawings, cartoons, AI art, sculptures or plush toys. Captioned cat photos are fine.",
+        "Replies can be anything.",
+        "New posts are checked by a bot within a minute; rejected posts are deleted after a day."
+    ],
+    "settings": {
+        "fetchThumbnailUrls": true,
+        "purgeDisapprovedCommentsOlderThan": 86400,
+        "challenges": [
+            {
+                "name": "@bitsocial/spam-blocker-challenge",
+                "exclude": [{ "roles": ["moderator", "admin", "owner"] }]
+            },
+            {
+                "name": "publication-match",
+                "description": "New posts wait for the cat check before they appear.",
+                "pendingApproval": true,
+                "exclude": [
+                    { "roles": ["moderator", "admin", "owner"] },
+                    {
+                        "publicationType": {
+                            "reply": true,
+                            "vote": true,
+                            "commentEdit": true,
+                            "commentModeration": true,
+                            "communityEdit": true
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

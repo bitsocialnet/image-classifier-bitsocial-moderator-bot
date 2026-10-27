@@ -1,0 +1,7 @@
+# The Immich ML image's NumPy needs x86-64-v2 (SSSE3/SSE4.2/POPCNT). Some VPSs expose an older virtual CPU
+# ("QEMU Virtual CPU" without those flags), and the container then crashes with "NumPy was built with baseline
+# optimizations: (X86_V2)". NumPy 2.2 only needs SSE3; ONNX Runtime picks CPU-specific code at runtime and still
+# works, just slower (about 3 s per image instead of 0.1 s on such a CPU).
+FROM ghcr.io/immich-app/immich-machine-learning:v3.3.5
+COPY --from=ghcr.io/astral-sh/uv:0.9.5 /uv /usr/local/bin/uv
+RUN uv pip install --python /opt/venv/bin/python --no-cache "numpy==2.2.6"

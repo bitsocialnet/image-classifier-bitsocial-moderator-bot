@@ -1,0 +1,9 @@
+# Override for CPUs without x86-64-v2 (check: grep -c sse4_2 /proc/cpuinfo prints 0). Use with:
+#
+#   docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.old-cpu.yml up -d --build
+services:
+    image-classifier-ml:
+        image: image-classifier-ml-old-cpu:v3.3.5
+        build:
+            context: .
+            dockerfile: Dockerfile.old-cpu
