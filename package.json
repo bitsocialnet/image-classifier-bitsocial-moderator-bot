@@ -39,7 +39,7 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
-        "@pkcprotocol/pkc-js": "0.0.133",
+        "@pkcprotocol/pkc-js": "0.0.135",
         "tsx": "4.23.15",
         "undici": "8.12.3",
         "zod": "4.3.5"
